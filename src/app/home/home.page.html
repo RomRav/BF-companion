@@ -1,20 +1,37 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>BF Companion</ion-title>
+    <ion-item>
+      <ion-label>Dernier allaitement le:
+        <ion-datetime value="{{this.bfserv.lastBreastfed.date}}" display-format="DD MMM, YYYY HH:mm"></ion-datetime>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Temps depuis le dernier allaitement:
+        <ion-datetime
+          display-format="[(ngModel)]='showTime.hours':[(ngModel)]='showTime.minutes':[(ngModel)]='showTime.secondes'">
+        </ion-datetime>
+      </ion-label>
+      <div>{{showTime.hours}}:{{showTime.minuts}}:{{showTime.seconds}}</div>
+
+    </ion-item>
+    <ion-item>
+      <ion-label>nombre d'allaitement aujourd'hui: {{this.bfserv.numberOfBfToday}}</ion-label>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content>
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-button (click)="addBreastfeeding('G')" size="large">
+      Gauche
+    </ion-button>
+    <ion-button (click)="addBreastfeeding('D')" size="large">
+      Droite
+    </ion-button>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-button size="large" expand="full" routerLink="/bf-list">Liste des allaitements</ion-button>
+</ion-footer>
