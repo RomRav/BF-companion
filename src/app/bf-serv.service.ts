@@ -27,7 +27,6 @@ export class BfServService {
   public listSchedul() {
     let orderedList = [];
     for (let i = this.breastfeedList.length; i >= 0; i--) {
-      console.log(i);
       orderedList.push(this.breastfeedList[i - 1]);
     }
     return orderedList;
@@ -59,9 +58,34 @@ export class BfServService {
   }
 
   public todayBfCompter() {
+    let compterBfByDay = 1;
+    let numberOfBfTab = [];
+    let bfByDay = {
+      day: null,
+      totalBf: null
+    };
     this.numberOfBfToday = 0;
-    this.breastfeedList.forEach(element => {
+    this.breastfeedList.forEach((element, index) => {
       let day = new Date(element.date);
+      console.log(numberOfBfTab + "aaaaaaaaaaaaaaaaaaaa");
+      if (index != 0) {
+        console.log(numberOfBfTab);
+        if (day.getUTCDate() == new Date(this.breastfeedList[index - 1].date).getUTCDate()) {
+          console.log(numberOfBfTab);
+          compterBfByDay++;
+        } else {
+          console.log(numberOfBfTab);
+          bfByDay.totalBf = compterBfByDay;
+          bfByDay.day = element.date;
+          // console.log(bfByDay);
+          numberOfBfTab.push(bfByDay);
+          console.log(numberOfBfTab);
+          compterBfByDay = 1;
+        }
+      }
+      numberOfBfTab = [];
+
+
       if (day.getUTCDate() == this.today.getUTCDate()) {
         this.numberOfBfToday++;
       }

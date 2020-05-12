@@ -22,10 +22,6 @@ export class HomePage implements OnInit {
     seconds: null
   };
 
-  public hourSinceLastBf = null;
-  public minutSinceLastBf = null;
-  public secondSinceLastBf = null;
-
   constructor(
     private storage: Storage,
     private router: Router,
@@ -50,10 +46,6 @@ export class HomePage implements OnInit {
       } else {
         this.showTime.seconds = this.lastBfTimer.getSeconds();
       }
-
-
-      // console.log(Date.now());
-      // console.log(this.bfserv.breastfeedList[this.bfserv.breastfeedList.length - 1].date.getMilliseconds());
     }, 1000);
   }
 
@@ -65,8 +57,8 @@ export class HomePage implements OnInit {
     this.breastfed.date = new Date;
     this.bfserv.breastfeedList.push(this.breastfed);
     this.bfserv.recList();
+    this.bfserv.lastBreastfedCheck();
     this.bfserv.presentToast('Allaitement bien enregistré');
-    // this.bfserv.listSchedul();
     this.router.navigateByUrl("bf-list");
   }
 
