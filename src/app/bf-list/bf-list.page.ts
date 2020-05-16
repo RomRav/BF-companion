@@ -18,17 +18,17 @@ export class BfListPage {
   ionViewWillEnter() {
     this.bfserv.getList().then(() => {
       this.bfserv.lastBreastfedCheck();
-      this.bfserv.todayBfCompter();
-      this.list = this.bfserv.breastfeedList;
-      console.log(this.list);
+      // this.bfserv.todayBfCompter();
+      this.list = this.bfserv.listSchedul(this.bfserv.breastfeedList);
     });
   }
 
   public delete(pos) {
     //supprimer la tâche
-    this.bfserv.breastfeedList.splice(pos, 1);
+    this.list.splice(pos, 1);
+    this.bfserv.breastfeedList = this.bfserv.listSchedul(this.list);
     //sauvegarde 
-    this.storage.set('bf-companion', this.bfserv.breastfeedList);
+    this.bfserv.recList()
     this.bfserv.lastBreastfedCheck();
     this.bfserv.presentToast('Allaitement supprimé');
   }
@@ -36,10 +36,12 @@ export class BfListPage {
   public update($ev, pos, item) {
     if (item == 1) {
       let newDate = $ev.detail.value;
-      this.bfserv.breastfeedList[pos].date = newDate;
+      this.list[pos].date = newDate;
+      this.bfserv.breastfeedList=this.bfserv.listSchedul(this.list);
     } else {
       let newComment = $ev.detail.value;
-      this.bfserv.breastfeedList[pos].comment = newComment;
+      this.list[pos].comment = newComment;
+      this.bfserv.breastfeedList=this.bfserv.listSchedul(this.list);
     }
     this.bfserv.recList();
   }
