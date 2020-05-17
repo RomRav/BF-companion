@@ -3,7 +3,7 @@
     <ion-title>BF Companion</ion-title>
     <ion-item>
       <ion-label>Dernier allaitement le:
-        <ion-datetime  value="{{this.bfserv.lastBreastfed.date}}" display-format="DD MMM, YYYY HH:mm"></ion-datetime>
+        <ion-datetime value="{{this.bfserv.lastBreastfed.date}}" display-format="DD MMM, YYYY HH:mm"></ion-datetime>
       </ion-label>
     </ion-item>
     <ion-item>
@@ -13,14 +13,12 @@
         </ion-datetime>
       </ion-label>
       <div>{{showTime.hours}}:{{showTime.minuts}}:{{showTime.seconds}}</div>
-
     </ion-item>
     <ion-item>
       <ion-label>nombre d'allaitement aujourd'hui: {{this.bfserv.numberOfBfToday}}</ion-label>
     </ion-item>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="content">
   <div id="container">
     <ion-button (click)="addBreastfeeding('G')" size="large">
@@ -35,9 +33,7 @@
       </ion-button>
     </div>
   </div>
- 
 </ion-content>
-
 <ion-footer>
   <ion-button size="large" expand="full" routerLink="/bf-list">Liste des allaitements</ion-button>
 </ion-footer>

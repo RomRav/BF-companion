@@ -28,13 +28,11 @@ export class HomePage implements OnInit {
     public bfserv: BfServService
   ) {
     // this.storage.clear();
-    // this.LastBfTimer();
   }
 
   ngOnInit() {
     window.setInterval(() => {
-      let currentTime = new Date;
-      this.lastBfTimer = new Date(Date.now() - this.bfserv.lastBreastfed.date.getTime());
+      this.lastBfTimer = new Date(Date.now() - new Date(this.bfserv.lastBreastfed.date).getTime());
       this.showTime.hours = this.lastBfTimer.getHours() - 1;
       if (this.showTime.minuts < 10) {
         this.showTime.minuts = '0' + this.lastBfTimer.getMinutes();
@@ -49,17 +47,17 @@ export class HomePage implements OnInit {
     }, 1000);
   }
 
-
-
+  ionViewWillEnter() {
+    this.bfserv.lastBreastfedCheck();
+  }
 
   public addBreastfeeding(breastSide: string) {
     this.breastfed.breast = breastSide;
     this.breastfed.date = new Date;
-    this.bfserv.breastfeedList.push(this.breastfed);
+    this.bfserv.breastfeedList.unshift(this.breastfed);
     this.bfserv.recList();
     this.bfserv.lastBreastfedCheck();
     this.bfserv.presentToast('Allaitement bien enregistré');
     this.router.navigateByUrl("bf-list");
   }
-
 }
