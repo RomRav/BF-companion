@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'bf-list',
     loadChildren: () => import('./bf-list/bf-list.module').then( m => m.BfListPageModule)
   },
+  {
+    path: 'bf-state',
+    loadChildren: () => import('./bf-state/bf-state.module').then( m => m.BfStatePageModule)
+  },
 ];
 
 @NgModule({

@@ -8,16 +8,20 @@ import { BfServService } from '../bf-serv.service';
   templateUrl: './bf-list.page.html',
   styleUrls: ['./bf-list.page.scss'],
 })
-export class BfListPage {
+export class BfListPage implements OnInit {
   public list = [];
   public showTexte = false;
 
   constructor(private bfserv: BfServService, private storage: Storage) { }
 
+  ngOnInit() {
+    this.bfserv.getList().then(() => {
+      this.list = this.bfserv.breastfeedList;
+    });
+  }
+
   ionViewWillEnter() {
     this.bfserv.getList().then(() => {
-      // this.bfserv.lastBreastfedCheck();
-      // this.bfserv.todayBfCompter();
       this.list = this.bfserv.breastfeedList;
     });
   }
@@ -32,7 +36,7 @@ export class BfListPage {
 
   public update($ev, pos, item) {
     if (item == 1) {
-      let newDate = $ev.detail.value;
+      let newDate = new Date($ev.detail.value);
       this.bfserv.breastfeedList[pos].date = newDate;
     } else {
       let newComment = $ev.detail.value;

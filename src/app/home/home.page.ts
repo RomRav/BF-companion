@@ -21,17 +21,18 @@ export class HomePage implements OnInit {
     minuts: null,
     seconds: null
   };
-
   constructor(
     private storage: Storage,
     private router: Router,
     public bfserv: BfServService
   ) {
+    this.bfserv.getList();
     // this.storage.clear();
   }
 
   ngOnInit() {
     window.setInterval(() => {
+      this.bfserv.todayBfCompter();
       this.lastBfTimer = new Date(Date.now() - new Date(this.bfserv.lastBreastfed.date).getTime());
       this.showTime.hours = this.lastBfTimer.getHours() - 1;
       if (this.showTime.minuts < 10) {
@@ -48,7 +49,10 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.bfserv.lastBreastfedCheck();
+    window.setTimeout(() => {
+      this.bfserv.lastBreastfedCheck();
+    }, 0);
+
   }
 
   public addBreastfeeding(breastSide: string) {
