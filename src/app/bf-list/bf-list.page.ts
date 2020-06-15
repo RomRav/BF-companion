@@ -38,9 +38,12 @@ export class BfListPage implements OnInit {
     if (item == 1) {
       let newDate = new Date($ev.detail.value);
       this.bfserv.breastfeedList[pos].date = newDate;
-    } else {
+    } else if (item == 2) {
       let newComment = $ev.detail.value;
       this.bfserv.breastfeedList[pos].comment = newComment;
+    } else {
+      let newBfMode = $ev.detail.value;
+      this.bfserv.breastfeedList[pos].breast = newBfMode;
     }
     this.bfserv.presentToast('Allaitement modifié');
     this.bfserv.recList();

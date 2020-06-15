@@ -19,9 +19,11 @@
         </ion-item-option>
       </ion-item-options>
       <ion-item>
-        <div>
-          <ion-label>{{bf.breast}}</ion-label>
-        </div>
+          <ion-select value={{bf.breast}} (ionChange)="update($event, pos, 3)">
+            <ion-select-option>D</ion-select-option>
+            <ion-select-option>G</ion-select-option>
+            <ion-select-option>B</ion-select-option>
+          </ion-select>
         <ion-datetime value="{{bf.date}}" display-format="MMM DD, YYYY HH:mm" (ionChange)="update($event, pos, 1)">
         </ion-datetime>
       </ion-item>

@@ -63,8 +63,13 @@ export class BfServService implements OnInit {
   }
 
   public todayBfCompter() {
-    this.numberOfBfToday = this.dataTab[0].bfQt;
-    console.log(this.numberOfBfToday);
+    if (this.dataTab[0].date.getDate() == this.today.getUTCDate()) {
+      this.numberOfBfToday = this.dataTab[0].bfQt;
+      console.log(this.numberOfBfToday);
+    } else {
+      this.numberOfBfToday = 0;
+    }
+
     // this.breastfeedList.forEach((element, index) => {
     //   let day = new Date(element.date);
     //   if (day.getUTCDate() == this.today.getUTCDate()) {
