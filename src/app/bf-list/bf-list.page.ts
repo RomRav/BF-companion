@@ -16,24 +16,33 @@ export class BfListPage implements OnInit {
 
   ngOnInit() {
     this.bfserv.getList().then(() => {
-      this.list = this.bfserv.breastfeedList;
     });
   }
-
+  
   ionViewWillEnter() {
     this.bfserv.getList().then(() => {
       this.list = this.bfserv.breastfeedList;
     });
   }
 
+/**
+ * @function Delete fonction
+ * Gestion de la suppression des données
+ * @param pos 
+ */
   public delete(pos) {
-    //supprimer la tâche
     this.bfserv.breastfeedList.splice(pos, 1);
-    //sauvegarde 
     this.bfserv.recList()
     this.bfserv.presentToast('Allaitement supprimé');
   }
 
+  /**
+   * @function Update fonction
+   * Gestion de la mise à jour des données
+   * @param $ev 
+   * @param pos 
+   * @param item 
+   */
   public update($ev, pos, item) {
     if (item == 1) {
       let newDate = new Date($ev.detail.value);

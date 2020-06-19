@@ -30,14 +30,17 @@ export class BfServService implements OnInit {
   }
 
   ngOnInit() {
-    this.getList().then(() => {
-      this.numberBfPerDay().then(() => {
-        this.lastBreastfedCheck();
-        this.numberBfPerDay();
-      });
-    });
+    // this.getList().then(() => {
+    //   this.numberBfPerDay().then(() => {
+    //     this.lastBreastfedCheck();
+    //     this.numberBfPerDay();
+    //   });
+    // });
   }
-
+/**
+ * Gestion des messages de confirmation de CRUD
+ * @param message 
+ */
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
@@ -46,13 +49,19 @@ export class BfServService implements OnInit {
     });
     toast.present();
   }
-
+/**
+ * Sauvegarde des données
+ */
   public recList() {
     this.storage.set("bf-companion", this.breastfeedList).then(() => {
       this.todayBfCompter();
     });
   }
 
+  /**
+   * @function getList
+   * Récupération des données
+   */
   public getList() {
     return new Promise((res, rej) => {
       this.storage.get("bf-companion").then((data) => {
@@ -62,6 +71,10 @@ export class BfServService implements OnInit {
     });
   }
 
+  /**
+   * @function todayBfCompter
+   * Récupération du nombre d'allaitement du jour
+   */
   public todayBfCompter() {
     if (this.dataTab[0].date.getDate() == this.today.getUTCDate()) {
       this.numberOfBfToday = this.dataTab[0].bfQt;
@@ -69,18 +82,18 @@ export class BfServService implements OnInit {
     } else {
       this.numberOfBfToday = 0;
     }
-
-    // this.breastfeedList.forEach((element, index) => {
-    //   let day = new Date(element.date);
-    //   if (day.getUTCDate() == this.today.getUTCDate()) {
-    //     this.numberOfBfToday++;
-    //   }
-    // });
   }
 
+  /**
+   * @function lastBreastfedCheck
+   * Récupération de la date du dérnier alliatement
+   */
   public lastBreastfedCheck() {
     this.lastBreastfed = this.breastfeedList[0];
   }
+
+
+
   //////////////////////////////////////////////////////////////////////
   /**
    * Methodes de comptage du nombre d'allaitement par jour

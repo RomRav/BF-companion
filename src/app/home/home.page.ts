@@ -33,6 +33,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     window.setInterval(() => {
       this.bfserv.todayBfCompter();
+      //Gestion du temps passé depuis le dernier allaitement
       this.lastBfTimer = new Date(Date.now() - new Date(this.bfserv.lastBreastfed.date).getTime());
       this.showTime.hours = this.lastBfTimer.getHours() - 1;
       if (this.showTime.minuts < 10) {
@@ -55,6 +56,11 @@ export class HomePage implements OnInit {
 
   }
 
+
+  /**
+   * Gestion de l'ajout d'un allaitement
+   * @param breastSide 
+   */
   public addBreastfeeding(breastSide: string) {
     this.breastfed.breast = breastSide;
     this.breastfed.date = new Date;
