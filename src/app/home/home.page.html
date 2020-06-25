@@ -1,40 +1,62 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>BF Companion</ion-title>
-    <ion-item>
-      <ion-label>Dernier allaitement le:
-        <ion-datetime value="{{this.bfserv.lastBreastfed.date}}" display-format="DD MMM, YYYY HH:mm"></ion-datetime>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Temps depuis le dernier allaitement:
-        <ion-datetime
-          display-format="[(ngModel)]='showTime.hours':[(ngModel)]='showTime.minutes':[(ngModel)]='showTime.secondes'">
-        </ion-datetime>
-      </ion-label>
-      <div>{{showTime.hours}}:{{showTime.minuts}}:{{showTime.seconds}}</div>
-    </ion-item>
-    <ion-item>
-      <ion-label>nombre d'allaitement aujourd'hui: {{this.bfserv.numberOfBfToday}}</ion-label>
-    </ion-item>
   </ion-toolbar>
+  <!-- <div class="data-container">
+    <div class="compter" >
+     <h2>{{this.bfserv.numberOfBfToday}} repas aujourd'hui</h2> 
+    </div>
+    <div class="last-meal">
+      <h2>Dernier repas le:</h2>
+      <ion-datetime value="{{this.bfserv.lastBreastfed.date}}" display-format="DD MMM, YYYY HH:mm"></ion-datetime>
+      <h2> Il y a:</h2>
+      <ion-datetime display-format="[(ngModel)]='showTime.hours':[(ngModel)]='showTime.minutes':[(ngModel)]='showTime.secondes'"></ion-datetime>
+    </div>
+  </div> -->
+  <ion-item color="light">
+    <ion-label>Dernier repas le:</ion-label>
+    <ion-datetime value="{{this.bfserv.lastBreastfed.date}}" display-format="DD MMM, YYYY HH:mm"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      <ion-icon name="restaurant"></ion-icon>
+      Il y a:
+    </ion-label>
+    <ion-datetime
+      display-format="[(ngModel)]='showTime.hours':[(ngModel)]='showTime.minutes':[(ngModel)]='showTime.secondes'">
+    </ion-datetime>
+
+
+
+    <div>{{showTime.hours}}:{{showTime.minuts}}:{{showTime.seconds}}</div>
+  </ion-item>
+  <ion-item color="light">
+    <ion-label>{{this.bfserv.numberOfBfToday}} repas aujourd'hui</ion-label>
+  </ion-item>
+
 </ion-header>
 <ion-content class="content">
-  <div id="container">
-    <ion-button (click)="addBreastfeeding('G')" size="large">
-      Gauche
-    </ion-button>
-    <ion-button (click)="addBreastfeeding('D')" size="large">
-      Droite
-    </ion-button>
-    <div>
-      <ion-button (click)="addBreastfeeding('B')" size="large">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="addBreastfeeding('G')" size="large">
+          Gauche
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" (click)="addBreastfeeding('D')" size="large">
+          Droite
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    
+      <ion-button expand="block" (click)="addBreastfeeding('B')" size="large">
         Biberon
       </ion-button>
-    </div>
-  </div>
+    
+  </ion-grid>
 </ion-content>
 <ion-footer>
-  <ion-button size="large" expand="full" routerLink="/bf-list">Liste des allaitements</ion-button>
-  <ion-button size="large" expand="full" routerLink="/bf-state">Statistiques</ion-button>
+  <ion-button size="large" expand="block" color="secondary" routerLink="/bf-list">Liste</ion-button>
+  <ion-button size="large" expand="block" color="secondary" routerLink="/bf-state">Repas/jour</ion-button>
 </ion-footer>

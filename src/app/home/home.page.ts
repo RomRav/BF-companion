@@ -13,7 +13,8 @@ export class HomePage implements OnInit {
   private breastfed = {
     date: null,
     breast: null,
-    comment: null
+    comment: null,
+    visible: false
   };
   public lastBfTimer = null;
   public showTime = {

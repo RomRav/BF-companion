@@ -24,13 +24,17 @@
             <ion-select-option>G</ion-select-option>
             <ion-select-option>B</ion-select-option>
           </ion-select>
-        <ion-datetime value="{{bf.date}}" display-format="MMM DD, YYYY HH:mm" (ionChange)="update($event, pos, 1)">
+        <ion-datetime value="{{bf.date}}" display-format="DD, MMM, YYYY HH:mm" (ionChange)="update($event, pos, 1)">
         </ion-datetime>
+        <ion-toggle color="success" side="end" (ionChange)="update(bf.visible, pos, 4)"></ion-toggle>
+        <ion-item *ngIf="bf.visible as value else false">
+          <ion-textarea (ionChange)="update($event,pos,2)" value="{{bf.comment}}">comment:</ion-textarea>
+        </ion-item>
       </ion-item>
-      <ion-item *ngIf="showTexte">
+      <!-- <ion-item *ngIf="showTexte">
         <ion-label>Ajoutez un commentaire:</ion-label>
         <ion-textarea (ionChange)="update($event,pos,2)" value="{{bf.comment}}"></ion-textarea>
-      </ion-item>
+      </ion-item> -->
     </ion-item-sliding>
   </ion-list>
 </ion-content>

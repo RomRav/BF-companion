@@ -18,18 +18,18 @@ export class BfListPage implements OnInit {
     this.bfserv.getList().then(() => {
     });
   }
-  
+
   ionViewWillEnter() {
     this.bfserv.getList().then(() => {
       this.list = this.bfserv.breastfeedList;
     });
   }
 
-/**
- * @function Delete fonction
- * Gestion de la suppression des données
- * @param pos 
- */
+  /**
+   * @function Delete fonction
+   * Gestion de la suppression des données
+   * @param pos 
+   */
   public delete(pos) {
     this.bfserv.breastfeedList.splice(pos, 1);
     this.bfserv.recList()
@@ -50,12 +50,31 @@ export class BfListPage implements OnInit {
     } else if (item == 2) {
       let newComment = $ev.detail.value;
       this.bfserv.breastfeedList[pos].comment = newComment;
-    } else {
+    } else if (item == 3) {
       let newBfMode = $ev.detail.value;
       this.bfserv.breastfeedList[pos].breast = newBfMode;
+    } else if (item == 4) {
+      let newVisibility = false;
+      if ($ev == null) {
+        newVisibility = true;
+      } else {
+        if ($ev == false) {
+          newVisibility = true;
+        } else {
+          newVisibility = false;
+        }
+      }
+      this.bfserv.breastfeedList[pos].visible = newVisibility;
+
     }
     this.bfserv.presentToast('Allaitement modifié');
     this.bfserv.recList();
   }
 
+  public switchVisibilityComment() {
+
+  }
+
 }
+
+
